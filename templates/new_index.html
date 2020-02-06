@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-3">
+        {% for folder in folders %}
+            {% if folder.links_for_folder.all %}
+                <div class="card">
+                    <div class="card-header bg-dark" style="color: white;">{{ folder.name }}</div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            {% for link in folder.links_for_folder.all %}
+                                <a href="{{ link.link }}" target="_blank">{{ link.name }}</a>
+                            {% endfor %}                        
+                        </p>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <div class="col-md-9">
+        {% for issue in issues %}
+            <h3>{{ issue.title }}</h3>
+            <p>{{ issue.body }}</p>
+            <br/>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
